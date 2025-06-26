@@ -7,7 +7,6 @@ import { useState, useCallback } from "react";
 import { ReactFlowProvider } from "reactflow";
 
 export default function ETLPipeline() {
-  const [isRunning, setIsRunning] = useState(false);
   const [selectedNodes, setSelectedNodes] = useState<string[]>([]);
   const [selectedStages, setSelectedStages] = useState<string[]>([]);
 

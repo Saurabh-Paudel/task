@@ -14,6 +14,7 @@ import ReactFlow, {
   BackgroundVariant,
   type OnSelectionChangeParams,
   SelectionMode,
+  ReactFlowInstance,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import CustomNode from "./CustomeNode";
@@ -21,11 +22,9 @@ import CustomNode from "./CustomeNode";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 
@@ -157,7 +156,8 @@ export default function PipelineCanvas({
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
-  const [reactFlowInstance, setReactFlowInstance] = useState<any>(null);
+  const [reactFlowInstance, setReactFlowInstance] =
+    useState<ReactFlowInstance | null>(null);
   const [nodeIdCounter, setNodeIdCounter] = useState(7);
 
   const [dialogNode, setDialogNode] = useState<Node | null>(null);
@@ -192,7 +192,7 @@ export default function PipelineCanvas({
       const newNode: Node = {
         id: `${nodeIdCounter}`,
         type: nodeData.type,
-        position,
+        position: position || { x: 0, y: 0 },
         data: nodeData.data,
         selected: false,
       };
@@ -265,10 +265,16 @@ export default function PipelineCanvas({
               </p>
             </div>
             <SheetFooter className="flex flex-row items-center justify-center gap-4">
-              <Button onClick={() => setDialogNode(null)} className="w-[180px]">
+              <Button
+                onClick={() => setDialogNode(null)}
+                className="w-[180px] bg-gray-200 text-gray-800"
+              >
                 Cancel
               </Button>
-              <Button variant="default" className="w-[180px]">
+              <Button
+                variant="default"
+                className="w-[180px] bg-[#028F33] text-white rounded-xl"
+              >
                 Save configuration
               </Button>
             </SheetFooter>
