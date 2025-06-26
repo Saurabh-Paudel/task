@@ -1,5 +1,9 @@
+import { useState } from "react";
 import { Handle, Position } from "reactflow";
 import {
+  Pencil,
+  Copy as CopyIcon,
+  Trash,
   Database,
   BarChart3,
   Shield,
@@ -40,9 +44,25 @@ export default function CustomNode({ data, selected }: CustomNodeProps) {
   const Icon = iconMap[data.icon] || Database;
   const colorClass = colorMap[data.color];
 
+  const [hovered, setHovered] = useState(false);
+
+  const handleEdit = () => {
+    alert(`Edit ${data.label}`);
+  };
+
+  const handleCopy = () => {
+    alert(`Copy ${data.label}`);
+  };
+
+  const handleDelete = () => {
+    alert(`Delete ${data.label}`);
+  };
+
   return (
     <div
-      className={`bg-white rounded-lg border shadow-sm min-w-auto min-h-[51px] transition-all ${
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className={`bg-white rounded-lg border shadow-sm min-w-auto min-h-[51px] transition-all cursor-pointer ${
         selected
           ? "border-blue-500 shadow-lg ring-2 ring-blue-200"
           : "border-gray-200 hover:shadow-md"
@@ -54,16 +74,34 @@ export default function CustomNode({ data, selected }: CustomNodeProps) {
         className="w-2 h-2 bg-gray-400 border-gray-400"
       />
 
-      <div className="p-3 flex items-center justify-between gap-2">
+      <div className="px-3 py-2 flex items-center justify-between gap-2 relative">
         <div className={`p-1.5 rounded ${colorClass}`}>
           <Icon className="h-3 w-3" />
         </div>
-        <div className="flex flex-col gap-1 items-start justify-start">
+
+        <div className="flex flex-col gap- items-start justify-start">
           <span className="font-medium text-sm text-gray-900">
             {data.label}
           </span>
           <span className="text-xs text-gray-500">{data.status}</span>
         </div>
+
+        {hovered && (
+          <div className="absolute top-1 right-1 flex gap-1 bg-white rounded px-1 shadow border">
+            <Pencil
+              onClick={handleEdit}
+              className="w-3 h-3 text-gray-600 hover:text-blue-600 cursor-pointer"
+            />
+            <CopyIcon
+              onClick={handleCopy}
+              className="w-3 h-3 text-gray-600 hover:text-blue-600 cursor-pointer"
+            />
+            <Trash
+              onClick={handleDelete}
+              className="w-3 h-3 text-gray-600 hover:text-red-500 cursor-pointer"
+            />
+          </div>
+        )}
       </div>
 
       <Handle

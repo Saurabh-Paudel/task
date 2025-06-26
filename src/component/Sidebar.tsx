@@ -3,22 +3,15 @@
 import type React from "react";
 
 import { useState } from "react";
-import {
-  ChevronDown,
-  Database,
-  Shield,
-  RotateCcw,
-  Zap,
-  BarChart3,
-  FileOutput,
-} from "lucide-react";
+import { ChevronDown, CopyX, FileDown, FileUp, Funnel } from "lucide-react";
+import { TbTransform } from "react-icons/tb";
 
 const stages = [
   {
     id: "ingest",
     name: "Ingest",
     description: "Load raw input data",
-    icon: Database,
+    icon: FileUp,
     color: "text-blue-600 bg-blue-50",
     nodeType: "custom",
   },
@@ -26,7 +19,7 @@ const stages = [
     id: "deduplication",
     name: "De-duplication",
     description: "Clean and format",
-    icon: Shield,
+    icon: Funnel,
     color: "text-green-600 bg-green-50",
     nodeType: "custom",
   },
@@ -34,7 +27,7 @@ const stages = [
     id: "deidentification",
     name: "De-Identification",
     description: "Remove duplicate entries",
-    icon: RotateCcw,
+    icon: CopyX,
     color: "text-orange-600 bg-orange-50",
     nodeType: "custom",
   },
@@ -42,7 +35,7 @@ const stages = [
     id: "transformer",
     name: "Transformer",
     description: "Reshape and map data",
-    icon: Zap,
+    icon: TbTransform,
     color: "text-purple-600 bg-purple-50",
     nodeType: "custom",
   },
@@ -50,7 +43,7 @@ const stages = [
     id: "profiler",
     name: "Profiler",
     description: "Reshape and map data",
-    icon: BarChart3,
+    icon: TbTransform,
     color: "text-indigo-600 bg-indigo-50",
     nodeType: "custom",
   },
@@ -58,7 +51,7 @@ const stages = [
     id: "destination",
     name: "Destination Writer",
     description: "Save final output",
-    icon: FileOutput,
+    icon: FileDown,
     color: "text-red-600 bg-red-50",
     nodeType: "custom",
   },
@@ -113,18 +106,16 @@ export default function Sidebar({
   return (
     <div className="bg-white  flex flex-col transition-all duration-200 rounded-lg">
       {/* Header with toggle */}
-      <div className="p-4 flex items-center justify-between border-b border-gray-200">
+      <div
+        className="p-4 flex items-center justify-between border-b border-gray-200"
+        onClick={() => setIsCollapsed(!isCollapsed)}
+      >
         <span className="font-medium text-gray-900">Stages</span>
-        <button
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          className="flex items-center text-left"
-        >
-          <ChevronDown
-            className={`h-4 w-4 text-gray-500 transition-transform ${
-              isCollapsed ? "-rotate-90" : ""
-            }`}
-          />
-        </button>
+        <ChevronDown
+          className={`h-4 w-4 text-gray-500 transition-transform ${
+            isCollapsed ? "-rotate-90" : ""
+          }`}
+        />
       </div>
 
       {/* Expanded view: full details */}

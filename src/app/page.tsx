@@ -34,7 +34,7 @@ export default function ETLPipeline() {
           </div>
 
           {/* Sidebar overlay */}
-          <div className="absolute top-0 left-0 h-full z-20 w-72 m-2">
+          <div className="absolute top-0 left-0 h-auto z-20 w-72 m-2">
             <Sidebar
               selectedStages={selectedStages}
               onStageSelection={handleStageSelection}
@@ -42,7 +42,7 @@ export default function ETLPipeline() {
           </div>
 
           {/* Logs Panel overlay */}
-          <div className="absolute top-0 right-0 h-full z-20 w-72 m-2">
+          <div className="absolute top-0 right-0 h-auto z-20 w-72 m-2">
             <LogsPanel />
           </div>
         </div>

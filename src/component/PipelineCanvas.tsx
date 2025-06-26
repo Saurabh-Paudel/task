@@ -32,118 +32,9 @@ const nodeTypes = {
   custom: CustomNode,
 };
 
-const initialNodes: Node[] = [
-  {
-    id: "1",
-    type: "custom",
-    position: { x: 100, y: 100 },
-    data: {
-      label: "Ingest",
-      status: "Start",
-      icon: "ingest",
-      color: "blue",
-    },
-    selected: false,
-  },
-  {
-    id: "2",
-    type: "custom",
-    position: { x: 300, y: 200 },
-    data: {
-      label: "Profiler",
-      status: "Start",
-      icon: "profiler",
-      color: "indigo",
-    },
-    selected: false,
-  },
-  {
-    id: "3",
-    type: "custom",
-    position: { x: 500, y: 100 },
-    data: {
-      label: "De-duplication",
-      status: "Start",
-      icon: "deduplication",
-      color: "green",
-    },
-    selected: false,
-  },
-  {
-    id: "4",
-    type: "custom",
-    position: { x: 700, y: 200 },
-    data: {
-      label: "Transformer",
-      status: "Start",
-      icon: "transformer",
-      color: "purple",
-    },
-    selected: false,
-  },
-  {
-    id: "5",
-    type: "custom",
-    position: { x: 600, y: 350 },
-    data: {
-      label: "De-identify",
-      status: "Start",
-      icon: "deidentification",
-      color: "orange",
-    },
-    selected: false,
-  },
-  {
-    id: "6",
-    type: "custom",
-    position: { x: 850, y: 400 },
-    data: {
-      label: "Destination Writer",
-      status: "Start",
-      icon: "destination",
-      color: "red",
-    },
-    selected: false,
-  },
-];
+const initialNodes: Node[] = [];
 
-const initialEdges: Edge[] = [
-  {
-    id: "e1-2",
-    source: "1",
-    target: "2",
-    type: "smoothstep",
-    style: { stroke: "#94a3b8", strokeWidth: 2 },
-  },
-  {
-    id: "e2-3",
-    source: "2",
-    target: "3",
-    type: "smoothstep",
-    style: { stroke: "#94a3b8", strokeWidth: 2 },
-  },
-  {
-    id: "e3-4",
-    source: "3",
-    target: "4",
-    type: "smoothstep",
-    style: { stroke: "#94a3b8", strokeWidth: 2 },
-  },
-  {
-    id: "e4-5",
-    source: "4",
-    target: "5",
-    type: "smoothstep",
-    style: { stroke: "#94a3b8", strokeWidth: 2 },
-  },
-  {
-    id: "e5-6",
-    source: "5",
-    target: "6",
-    type: "smoothstep",
-    style: { stroke: "#94a3b8", strokeWidth: 2 },
-  },
-];
+const initialEdges: Edge[] = [];
 
 interface PipelineCanvasProps {
   selectedNodes: string[];
@@ -250,7 +141,7 @@ export default function PipelineCanvas({
           open={!!dialogNode}
           onOpenChange={(open) => !open && setDialogNode(null)}
         >
-          <SheetContent side="right" className="h-full rounded-l-lg">
+          <SheetContent side="right" className="h-full w-[500px] rounded-l-lg">
             <SheetHeader>
               <SheetTitle className="flex items-center justify-between mt-2">
                 <p>Stage Configuration</p>
